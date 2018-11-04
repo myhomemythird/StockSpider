@@ -1,0 +1,26 @@
+<task-logs>
+  <task-log topic="Stock_Spider">
+    <analysis name="Attitudes">
+      1. Learning is the 1st.
+    </analysis>
+    <analysis name="Backgounds">
+      1. I plan to build a system to manage spiders with job.
+    </analysis>
+    <analysis name="Materails">
+      1. Design mind map.
+    </analysis>
+    <log name="default">
+      Projects:
+       Job Manager: mvn archetype:generate -DgroupId=org.richardliao -DartifactId=job-manager -Dpackage=org.richardliao.job.manger -Dversion=1.0-SNAPSHOT
+        Job API
+	Job Runner
+       Spider API: mvn archetype:generate -DgroupId=org.richardliao -DartifactId=spider-api -Dpackage=org.richardliao.spider -Dversion=1.0-SNAPSHOT
+        Extractor
+	Data Processor
+       Stock Spider: mvn archetype:generate -DgroupId=org.richardliao -DartifactId=stock-spider -Dpackage=org.richardliao.spider.stock -Dversion=1.0-SNAPSHOT
+    </log>
+    <log name="Front_End">
+     
+    </log>
+  </task-log>
+</task-logs>
