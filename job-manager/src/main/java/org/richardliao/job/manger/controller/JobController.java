@@ -18,21 +18,36 @@ import org.richardliao.job.manager.db.JobRepository;
 import org.richardliao.job.manager.CommonResponce;
 
 @RestController
-@RequestMapping(value="/job", produces="application/json")
+@RequestMapping(value="/job", consumes="application/json")
 public class JobController {
 
-    @Autowired
-    private JobRepository jobRepository;
+    private JobRepository repo;
 
-    @RequestMapping(value="/submit", method=POST)
-    public Object submitJob(Job job) {
-        jobRepository.save(job);
-	return new CommonResponce(0, "submitted");
+    @Autowired
+    public JobController(JobRepository repo) {
+	this.repo = repo;
     }
 
-    @RequestMapping(value="/{id}/stop", method=POST)
-    public Object stopJob(@PathVariable("id") String id, @QueryParam("t") String t) {
-	return new CommonResponce(0, "Stopped: " + id + ", " + t);
+    @RequestMapping(value="/submit", method=POST)
+    public Object submitJob(@RequestBody Job job) {
+        Job res = repo.save(job);
+	return new CommonResponce(0, "Job [" + res.getId() + "] submitted");
+    }
+
+    @RequestMapping(value="/{id}/stop", method=PUT)
+    public Object stopJob(@PathVariable("id") String id, @QueryParam("type") String type) {
+	if (null == id || "".equals(id.trim())) return new CommonResponce(0, "id is null");
+	if (null == type || "".equals(type.trim())) return new CommonResponce(0, "type is null");
+	Job jobDb = repo.findById(id);
+	if (null == jobDb) return new CommonResponce(0, "Job not found");
+	if ("0".equals(type.trim()))
+	    jobDb.setStatus("Suspend");
+	else if ("1".equals(type.trim()))
+	    jobDb.setStatus("Stop");
+	else
+	    return new CommonResponce(0, "Type un-recognized");
+	repo.save(jobDb);
+	return new CommonResponce(0, "Stopped: " + id + ", " + type);
     }
 
     @RequestMapping(value="/{id}", method=DELETE)
@@ -42,13 +57,13 @@ public class JobController {
 
     @RequestMapping(value="/list", method=GET)
     public Object jobList() {
-        List<Job> res = jobRepository.findList();
+        List<Job> res = repo.findAll();
 	return new CommonResponce(0, res);
     }
 
     @RequestMapping(value="/{id}/details", method=GET)
     public Object jobDetails(@PathVariable("id") String id) {
-        Job job = jobRepository.findOne(id);
+        Job job = repo.findById(id);
 	return new CommonResponce(0, job);
     }
 }

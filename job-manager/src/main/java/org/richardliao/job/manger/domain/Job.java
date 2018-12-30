@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("job")
+@Document
 public class Job {
     @Id
     private String id;
@@ -124,5 +124,16 @@ public class Job {
 
     public StatisticsData getStatisData() {
 	return this.statisData;
+    }
+
+    public String toString() {
+	StringBuilder sb = new StringBuilder();
+	sb.append("Job [");
+	sb.append("id=").append(this.id).append(", ");
+	sb.append("name=").append(this.name).append(", ");
+	sb.append("description=").append(this.description).append(", ");
+	sb.append("startTime=").append(this.startTime);
+	sb.append("]");
+	return sb.toString();
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages= {"org.richardliao.job.manger"},
+@ComponentScan(basePackages= {"org.richardliao.job.manger", "org.richardliao.job.manager.config"},
     excludeFilters= {
     		@Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)
     })

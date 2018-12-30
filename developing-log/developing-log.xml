@@ -5,6 +5,7 @@
     </analysis>
     <analysis name="Backgounds">
       1. I plan to build a system to manage spiders with job.
+      2. The issue blocked me for almost 2 month is caused by missing setting up config scan path. Spring may not scan components recursively.
     </analysis>
     <analysis name="Materails">
       1. Design mind map.

@@ -8,10 +8,5 @@ import org.springframework.data.mongodb.repository.Query;
 import org.richardliao.job.manager.domain.Job;
 
 public interface JobRepository extends MongoRepository<Job, String> {
-    Job save(Job job);
-
-    Job findOne(String id);
-
-    @Query("{'delereFlag': 'N'}")
-    List<Job> findList();
+    Job findById(String id);
 }
