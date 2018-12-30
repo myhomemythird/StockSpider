@@ -52,18 +52,25 @@ public class JobController {
 
     @RequestMapping(value="/{id}", method=DELETE)
     public Object deleteJob(@PathVariable("id") String id) {
+	if (null == id || "".equals(id.trim())) return new CommonResponce(0, "id is null");
+	Job jobDb = repo.findById(id);
+	if (null == jobDb) return new CommonResponce(0, "Job not found");
+	jobDb.setDeleteFlag("Y");
+	repo.save(jobDb);
 	return new CommonResponce(0, "Deleted: " + id);
     }
 
     @RequestMapping(value="/list", method=GET)
     public Object jobList() {
-        List<Job> res = repo.findAll();
+        List<Job> res = repo.findList();
 	return new CommonResponce(0, res);
     }
 
     @RequestMapping(value="/{id}/details", method=GET)
     public Object jobDetails(@PathVariable("id") String id) {
+	if (null == id || "".equals(id.trim())) return new CommonResponce(0, "id is null");
         Job job = repo.findById(id);
+	if (null == job) return new CommonResponce(0, "Job not found");
 	return new CommonResponce(0, job);
     }
 }

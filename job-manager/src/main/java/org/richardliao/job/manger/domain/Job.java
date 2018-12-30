@@ -11,11 +11,11 @@ public class Job {
     private String id;
     private String name;
     private String description;
-    private Date startTime;
-    private Date endTime;
+    private String startTime;
+    private String endTime;
     private String owner;
     private String creator;
-    private Date createTime;
+    private String createTime;
     private String deleteFlag;
     private String status;
     private String startUrl;
@@ -46,19 +46,19 @@ public class Job {
 	return this.description;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
 	this.startTime = startTime;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
 	return this.startTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
 	this.endTime = endTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
 	return this.endTime;
     }
 
@@ -78,11 +78,11 @@ public class Job {
 	return this.creator;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
 	this.createTime = createTime;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
 	return this.createTime;
     }
 

@@ -9,4 +9,6 @@ import org.richardliao.job.manager.domain.Job;
 
 public interface JobRepository extends MongoRepository<Job, String> {
     Job findById(String id);
+    @Query("{'deleteFlag': 'N'}")
+    List<Job> findList();
 }
